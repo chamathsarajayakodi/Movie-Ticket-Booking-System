@@ -1,0 +1,25 @@
+# Executable files
+*.exe
+
+# Object files
+*.o
+*.obj
+
+# Code::Blocks generated files
+*.layout
+*.depend
+
+# Build folders
+bin/
+obj/
+
+# Debug and Release folders
+Debug/
+Release/
+
+# Temporary files
+*.tmp
+*.bak
+
+# Log files
+*.log
