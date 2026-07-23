@@ -61,12 +61,92 @@ int main()
         switch(choice)
         {
             case 1:
-                printf("\nView Showtimes selected.\n");
+            {
+                printf("\n========== MOVIES & SHOWTIMES ==========\n");
+
+                for(int i = 0; i < 5; i++)
+                {
+                    printf("\nMovie %d: %s\n", i + 1, movies[i]);
+
+                    for(int j = 0; j < 2; j++)
+                    {
+                        printf("   Showtime %d: %s\n", j + 1, showtimes[i][j]);
+                    }
+                }
+
                 break;
+            }
 
             case 2:
-                printf("\nView Seat Map selected.\n");
+            {
+                int movieChoice, showChoice;
+
+                printf("\nSelect Movie:\n");
+
+                for(int i = 0; i < 5; i++)
+                {
+                    printf("%d. %s\n", i + 1, movies[i]);
+                }
+
+                printf("Enter Movie Number: ");
+                scanf("%d", &movieChoice);
+
+                if(movieChoice < 1 || movieChoice > 5)
+                {
+                    printf("Invalid movie!\n");
+                    break;
+                }
+
+                printf("\nSelect Showtime:\n");
+
+                for(int i = 0; i < 2; i++)
+                {
+                    printf("%d. %s\n", i + 1, showtimes[movieChoice - 1][i]);
+                }
+
+                printf("Enter Showtime Number: ");
+                scanf("%d", &showChoice);
+
+                if(showChoice < 1 || showChoice > 2)
+                {
+                    printf("Invalid showtime!\n");
+                    break;
+                }
+
+                printf("\n========== SEAT MAP ==========\n\n");
+
+                printf("      ");
+
+                for(int j = 1; j <= 10; j++)
+                {
+                    printf("%2d ", j);
+                }
+
+                printf("\n");
+
+                char rowNames[5] = {'A', 'B', 'C', 'D', 'E'};
+
+                for(int i = 0; i < 5; i++)
+                {
+                    printf("%c     ", rowNames[i]);
+
+                    for(int j = 0; j < 10; j++)
+                    {
+                        printf("%c  ", seats[movieChoice - 1][showChoice - 1][i][j]);
+                    }
+
+                    if(i == 0 || i == 1)
+                        printf(" Regular (Rs.500)");
+                    else if(i == 2 || i == 3)
+                        printf(" Premium (Rs.750)");
+                    else
+                        printf(" VIP (Rs.1000)");
+
+                    printf("\n");
+                }
+
                 break;
+            }
             case 3:
             {
                 int movieChoice, showChoice;
