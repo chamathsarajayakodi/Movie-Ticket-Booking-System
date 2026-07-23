@@ -24,7 +24,7 @@ int main()
         {"02:00 PM", "11:00 PM"}
     };
 
-    // 5 Movies × 2 Showtimes × 5 Rows × 10 Seats
+    // 5 Movies Ã— 2 Showtimes Ã— 5 Rows Ã— 10 Seats
     char seats[5][2][5][10];
 
     // Initialize all seats as available
@@ -57,7 +57,6 @@ int main()
         printf("-------------------------------------\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
-
         switch(choice)
         {
             case 1:
@@ -67,10 +66,32 @@ int main()
             case 2:
                 printf("View Seat Map selected.\n");
                 break;
-
             case 3:
-                printf("Book a Seat selected.\n");
-                break;
+            {
+                int movieChoice, showChoice;
+                char row;
+                int rowIndex, seatChoice;
+                char customerName[50];
+                float price;
+
+                printf("\n========== BOOK A SEAT ==========\n");
+
+                // Select Movie
+                printf("\nSelect Movie:\n");
+
+                for(int i = 0; i < 5; i++)
+                {
+                    printf("%d. %s\n", i + 1, movies[i]);
+                }
+
+                printf("Enter Movie Number: ");
+                scanf("%d", &movieChoice);
+
+                if(movieChoice < 1 || movieChoice > 5)
+                {
+                    printf("Invalid movie!\n");
+                    break;
+                }
 
            case 4:
             {
