@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 
 int main()
@@ -286,6 +287,7 @@ int main()
             case 6:
                 printf("\nRevenue Report selected.\n");
                 break;
+            }
 
             case 7:
                 printf("\nThank you for using the Movie Ticket Booking System!\n");
