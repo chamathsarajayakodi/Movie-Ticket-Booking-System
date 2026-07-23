@@ -24,7 +24,7 @@ int main()
         {"02:00 PM", "11:00 PM"}
     };
 
-    // 5 Movies × 2 Showtimes × 5 Rows × 10 Seats
+    // 5 Movies Ã— 2 Showtimes Ã— 5 Rows Ã— 10 Seats
     char seats[5][2][5][10];
 
     // Initialize all seats as available
@@ -93,92 +93,98 @@ int main()
                     break;
                 }
 
-                // Select Showtime
-                printf("\nSelect Showtime:\n");
+           case 4:
+            {
+                int movieChoice, showChoice, column;
+                char rowChar;
+                int rowIndex, columnIndex;
+                int movieIndex, showtimeIndex;
+
+                printf("\n========== CANCEL A BOOKING ==========\n");
+
+                // Step 1: Select Movie
+                printf("\nSelect Movie:\n");
+                for(int i = 0; i < 5; i++)
+                {
+                    printf("%d. %s\n", i + 1, movies[i]);
+                }
+
+                printf("Enter Movie Number (1-5): ");
+                scanf("%d", &movieChoice);
+
+                if(movieChoice < 1 || movieChoice > 5)
+                {
+                    printf("Invalid movie choice!\n");
+                    break;
+                }
+
+                // Step 2: Select Showtime
+                printf("\nSelect Showtime for %s\n", movies[movieChoice - 1]);
 
                 for(int i = 0; i < 2; i++)
                 {
                     printf("%d. %s\n", i + 1, showtimes[movieChoice - 1][i]);
                 }
 
-                printf("Enter Showtime Number: ");
+                printf("Enter Showtime Number (1-2): ");
                 scanf("%d", &showChoice);
 
                 if(showChoice < 1 || showChoice > 2)
                 {
-                    printf("Invalid showtime!\n");
+                    printf("Invalid showtime choice!\n");
                     break;
                 }
 
-                // Select Row
-                printf("Enter Row (A-E): ");
-                scanf(" %c", &row);
+                // Step 3: Seat
+                printf("Enter Row Letter (A-E): ");
+                scanf(" %c", &rowChar);
 
-                // Convert lowercase to uppercase
-                if(row >= 'a' && row <= 'e')
-                {
-                    row = row - 32;
-                }
-
-                rowIndex = row - 'A';
-
-                if(rowIndex < 0 || rowIndex > 4)
-                {
-                    printf("Invalid row!\n");
-                    break;
-                }
-
-                // Select Seat
                 printf("Enter Seat Number (1-10): ");
-                scanf("%d", &seatChoice);
+                scanf("%d", &column);
 
-                if(seatChoice < 1 || seatChoice > 10)
+                if(column < 1 || column > 10)
                 {
                     printf("Invalid seat number!\n");
                     break;
                 }
 
-                // Check seat availability
-                if(seats[movieChoice - 1][showChoice - 1][rowIndex][seatChoice - 1] == 'X')
+                // Convert row letter to index
+                if(rowChar >= 'a' && rowChar <= 'e')
                 {
-                    printf("\nSorry! This seat is already booked.\n");
-                    break;
+                    rowIndex = rowChar - 'a';
+                    rowChar -= 32;
                 }
-
-                // Customer name
-                printf("Enter Customer Name: ");
-                scanf(" %[^\n]", customerName);
-
-                // Calculate price according to row
-                if(rowIndex == 0 || rowIndex == 1)
+                else if(rowChar >= 'A' && rowChar <= 'E')
                 {
-                    price = 500;
-                }
-                else if(rowIndex == 2 || rowIndex == 3)
-                {
-                    price = 750;
+                    rowIndex = rowChar - 'A';
                 }
                 else
                 {
-                    price = 1000;
+                    printf("Invalid row! Enter A-E.\n");
+                    break;
                 }
 
-                // Book the seat
-                seats[movieChoice - 1][showChoice - 1][rowIndex][seatChoice - 1] = 'X';
+                movieIndex = movieChoice - 1;
+                showtimeIndex = showChoice - 1;
+                columnIndex = column - 1;
 
-                printf("\n========== BOOKING SUCCESSFUL ==========\n");
-                printf("Customer Name : %s\n", customerName);
-                printf("Movie         : %s\n", movies[movieChoice - 1]);
-                printf("Showtime      : %s\n", showtimes[movieChoice - 1][showChoice - 1]);
-                printf("Row           : %c\n", row);
-                printf("Seat Number   : %d\n", seatChoice);
-                printf("Ticket Price  : Rs. %.2f\n", price);
+                // Check booking
+                if(seats[movieIndex][showtimeIndex][rowIndex][columnIndex] == '.')
+                {
+                    printf("\nSeat %c%d is already available.\n", rowChar, column);
+                }
+                else
+                {
+                    seats[movieIndex][showtimeIndex][rowIndex][columnIndex] = '.';
+
+                    printf("\nBooking Cancelled Successfully!\n");
+                    printf("Movie    : %s\n", movies[movieIndex]);
+                    printf("Showtime : %s\n", showtimes[movieIndex][showtimeIndex]);
+                    printf("Seat     : %c%d\n", rowChar, column);
+                }
 
                 break;
             }
-            case 4:
-                printf("Cancel Booking selected.\n");
-                break;
 
             case 5:
                 printf("Search Booking selected.\n");
