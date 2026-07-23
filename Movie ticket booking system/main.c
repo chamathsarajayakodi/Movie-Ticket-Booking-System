@@ -63,7 +63,6 @@ int main()
             case 1:
                 printf("\nView Showtimes selected.\n");
                 break;
-            }
 
             case 2:
                 printf("\nView Seat Map selected.\n");
