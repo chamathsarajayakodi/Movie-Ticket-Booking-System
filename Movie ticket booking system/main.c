@@ -28,6 +28,12 @@ int main()
     // 5 Movies × 2 Showtimes × 5 Rows × 10 Seats
     char seats[5][2][5][10];
 
+    // Store ticket price after discounts
+    float ticketPrice[5][2][5][10] = {0};
+
+    // Running revenue
+    float totalRevenue = 0;
+
     // Initialize all seats as available
     for(int m = 0; m < 5; m++)
     {
@@ -233,29 +239,68 @@ int main()
                 scanf(" %[^\n]", customerName);
 
                 // Calculate price according to row
+                int category;
+                int seatCount;
+                float basePrice, finalPrice;
+
+                // Base price according to seat type
                 if(rowIndex == 0 || rowIndex == 1)
-                {
-                    price = 500;
-                }
+                    basePrice = 500;
                 else if(rowIndex == 2 || rowIndex == 3)
-                {
-                    price = 750;
-                }
+                    basePrice = 750;
                 else
+                    basePrice = 1000;
+
+                finalPrice = basePrice;
+
+                printf("\nCustomer Category\n");
+                printf("1. Regular\n");
+                printf("2. Student (10%% Discount)\n");
+                printf("3. Senior Citizen (20%% Discount)\n");
+                printf("Enter Category: ");
+                scanf("%d",&category);
+
+                // Only ONE category discount
+                switch(category)
                 {
-                    price = 1000;
+                case 2:
+                    finalPrice *= 0.90;
+                    break;
+
+                case 3:
+                    finalPrice *= 0.80;
+                    break;
+
+                default:
+                    break;
                 }
 
-                // Book the seat
-                seats[movieChoice - 1][showChoice - 1][rowIndex][seatChoice - 1] = 'X';
+                // Group discount
+                printf("Number of seats in this booking: ");
+                scanf("%d",&seatCount);
+
+                if(seatCount >= 4)
+                {
+                    finalPrice *= 0.90;
+                    printf("Group Discount Applied (10%%)\n");
+                }
+
+                // Mark selected seat
+                seats[movieChoice-1][showChoice-1][rowIndex][seatChoice-1]='X';
+
+                // Store ticket price
+                ticketPrice[movieChoice-1][showChoice-1][rowIndex][seatChoice-1]=finalPrice;
+
+                // Update revenue
+                totalRevenue += finalPrice;
 
                 printf("\n========== BOOKING SUCCESSFUL ==========\n");
                 printf("Customer Name : %s\n", customerName);
-                printf("Movie         : %s\n", movies[movieChoice - 1]);
-                printf("Showtime      : %s\n", showtimes[movieChoice - 1][showChoice - 1]);
+                printf("Movie         : %s\n", movies[movieChoice-1]);
+                printf("Showtime      : %s\n", showtimes[movieChoice-1][showChoice-1]);
                 printf("Row           : %c\n", row);
                 printf("Seat Number   : %d\n", seatChoice);
-                printf("Ticket Price  : Rs. %.2f\n", price);
+                printf("Final Price   : Rs. %.2f\n", finalPrice);
 
                 break;
             }
@@ -337,6 +382,10 @@ int main()
                 }
                 else
                 {
+                    totalRevenue -= ticketPrice[movieIndex][showtimeIndex][rowIndex][columnIndex];
+
+                    ticketPrice[movieIndex][showtimeIndex][rowIndex][columnIndex] = 0;
+
                     seats[movieIndex][showtimeIndex][rowIndex][columnIndex] = '.';
 
                     printf("\nBooking Cancelled Successfully!\n");
@@ -490,29 +539,17 @@ int main()
                 }
 
                 // Count booked seats
-                for(int row = 0; row < 5; row++)
+                totalTickets = 0;
+                float revenue = 0;
+
+                for(int row=0; row<5; row++)
                 {
-                    for(int seat = 0; seat < 10; seat++)
+                    for(int seat=0; seat<10; seat++)
                     {
-                        if(seats[movieChoice - 1]
-                               [showChoice - 1]
-                               [row][seat] == 'X')
+                        if(seats[movieChoice-1][showChoice-1][row][seat]=='X')
                         {
                             totalTickets++;
-
-                            // Calculate price according to seat tier
-                            if(row == 0 || row == 1)
-                            {
-                                totalRevenue += 500;
-                            }
-                            else if(row == 2 || row == 3)
-                            {
-                                totalRevenue += 750;
-                            }
-                            else
-                            {
-                                totalRevenue += 1000;
-                            }
+                            revenue += ticketPrice[movieChoice-1][showChoice-1][row][seat];
                         }
                     }
                 }
@@ -526,7 +563,7 @@ int main()
                        showtimes[movieChoice - 1][showChoice - 1]);
 
                 printf("Tickets Sold  : %d\n", totalTickets);
-                printf("Total Revenue : Rs. %.2f\n", totalRevenue);
+                printf("Total Revenue : Rs. %.2f\n", revenue);
 
                 break;
             }
