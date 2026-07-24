@@ -51,9 +51,11 @@ Requirements
 - C Programming Language
 
 Compile
+
 gcc main.c -o booking
 
 Run
+
 ./booking
 
 (Windows)
