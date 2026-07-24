@@ -16,12 +16,13 @@ This project is a command-line Movie Ticket Booking System developed in C for th
 
 Movies & Showtimes
 
-Movie        | Showtimes
-Avatar 2     | 10:00 AM, 07:00 PM
-Room No. 106 | 11:00 AM, 08:00 PM
-Toy Story 5  | 12:00 PM, 09:00 PM
-Minions      | 01:00 PM, 10:00 PM
-Spider-Man   | 02:00 PM, 11:00 PM
+o	Movie        | Showtimes
+o	Avatar 2     | 10:00 AM, 07:00 PM
+o	Room No. 106 | 11:00 AM, 08:00 PM
+o	Toy Story 5  | 12:00 PM, 09:00 PM
+o	Minions      | 01:00 PM, 10:00 PM
+o	Spider-Man   | 02:00 PM, 11:00 PM
+
 
 Seat Layout
 
