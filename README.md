@@ -31,9 +31,9 @@ Seat Layout
 
 Ticket Prices
 
-- Rows A–B: Rs. 500
-- Rows C–D: Rs. 750
-- Row E: Rs. 1000
+- Rows A–B: Rs. 500 (Regular)
+- Rows C–D: Rs. 750 (Premium)
+- Row E: Rs. 1000 (VIP)
 
 Features
 
