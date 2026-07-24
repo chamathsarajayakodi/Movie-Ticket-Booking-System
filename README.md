@@ -43,7 +43,7 @@ Features
 4. Cancel a booking
 5. Search bookings
 6. View revenue report
-7.Exigt
+7.Exit
 
 Requirements
 
