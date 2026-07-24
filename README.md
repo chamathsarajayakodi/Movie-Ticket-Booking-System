@@ -62,5 +62,4 @@ booking.exe
 
 Project File
 - "main.c" – Contains the complete Movie Ticket Booking System source code.
-- "main.c" – Contains the complete Movie Ticket Booking System source code.
 
